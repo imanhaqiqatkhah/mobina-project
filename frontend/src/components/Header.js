@@ -4,8 +4,33 @@ import { GrSearch } from "react-icons/gr"
 import { FaRegUserCircle } from "react-icons/fa"
 import { FaShoppingCart } from "react-icons/fa"
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import SummaryApi from "../common"
+import { toast } from "react-toastify"
+import { setUserDetails } from "../store/userSlice"
 
 const Header = () => {
+  const user = useSelector((state) => state?.user?.user)
+  const dispatch = useDispatch()
+
+  console.log("user header", user)
+
+  const handleLogout = async () => {
+    const fetchData = await fetch(SummaryApi.logout_user.url, {
+      method: SummaryApi.logout_user.method,
+      credentials: "include",
+    })
+
+    const data = await fetchData.json()
+
+    if (data.success) {
+      toast.success(data.message)
+      dispatch(setUserDetails(null))
+    }
+    if (data.error) {
+      toast.error(data.message)
+    }
+  }
   return (
     <header dir="rtl" className="h-16 shadow-md bg-white font-Koodak">
       <div className="container flex items-center justify-between h-full px-4 mx-auto">
@@ -27,7 +52,15 @@ const Header = () => {
         </div>
         <div dir="ltr" className="flex items-center gap-x-5">
           <div className="text-3xl cursor-pointer">
-            <FaRegUserCircle />
+            {user?.profilePic ? (
+              <img
+                src={user?.profilePic}
+                className="mx-auto h-12 w-10  sm:h-11 md:w-96 lg:w-60 md:h-22 rounded-full"
+                alt={user?.name}
+              />
+            ) : (
+              <FaRegUserCircle />
+            )}
           </div>
           <div className="relative text-2xl">
             <span>
@@ -38,12 +71,21 @@ const Header = () => {
             </div>
           </div>
           <div>
-            <Link
-              to={"/login"}
-              className="px-3 py-1  duration-300 bg-yellow-400 rounded-xl hover:bg-yellow-500 transition-all font-bold"
-            >
-              ورود
-            </Link>
+            {user?._id ? (
+              <button
+                onClick={handleLogout}
+                className="px-3 py-1  duration-300 bg-yellow-400 rounded-xl hover:bg-yellow-500 transition-all font-bold"
+              >
+                خروج
+              </button>
+            ) : (
+              <Link
+                to={"/login"}
+                className="px-3 py-1  duration-300 bg-yellow-400 rounded-xl hover:bg-yellow-500 transition-all font-bold"
+              >
+                ورود
+              </Link>
+            )}
           </div>
         </div>
       </div>
