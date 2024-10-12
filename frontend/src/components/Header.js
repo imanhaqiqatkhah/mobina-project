@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import logo from "../assets/logo1.png"
 import { GrSearch } from "react-icons/gr"
 import { FaRegUserCircle } from "react-icons/fa"
@@ -12,6 +12,7 @@ import { setUserDetails } from "../store/userSlice"
 const Header = () => {
   const user = useSelector((state) => state?.user?.user)
   const dispatch = useDispatch()
+  const [menuDisplay, setMenuDisplay] = useState(false)
 
   console.log("user header", user)
 
@@ -51,15 +52,34 @@ const Header = () => {
           />
         </div>
         <div dir="ltr" className="flex items-center gap-x-5">
-          <div className="text-3xl cursor-pointer">
-            {user?.profilePic ? (
-              <img
-                src={user?.profilePic}
-                className="mx-auto h-12 w-10  sm:h-11 md:w-96 lg:w-60 md:h-22 rounded-full"
-                alt={user?.name}
-              />
-            ) : (
-              <FaRegUserCircle />
+          <div className="relative flex justify-center">
+            <div
+              className="text-3xl cursor-pointer relative flex justify-center"
+              onClick={() => setMenuDisplay((prev) => !prev)}
+            >
+              {user?.profilePic ? (
+                <img
+                  src={user?.profilePic}
+                  className="mx-auto h-10 w-10  sm:h-11 md:w-96 lg:w-60 md:h-22 rounded-full"
+                  alt={user?.name}
+                />
+              ) : (
+                <FaRegUserCircle />
+              )}
+            </div>
+
+            {menuDisplay && (
+              <div className="bg-white bottom-0 absolute top-11 h-fit p-2 shadow-lg rounded">
+                <nav>
+                  <Link
+                    to={"admin-panel"}
+                    className="whitespace-nowrap hover:bg-yellow-50 p-2"
+                    onClick={() => setMenuDisplay((prev) => !prev)}
+                  >
+                    پروفایل
+                  </Link>
+                </nav>
+              </div>
             )}
           </div>
           <div className="relative text-2xl">
