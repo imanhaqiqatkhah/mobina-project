@@ -14,8 +14,6 @@ const Header = () => {
   const dispatch = useDispatch()
   const [menuDisplay, setMenuDisplay] = useState(false)
 
-  console.log("user header", user)
-
   const handleLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
       method: SummaryApi.logout_user.method,
@@ -73,7 +71,7 @@ const Header = () => {
                 <nav>
                   <Link
                     to={"admin-panel"}
-                    className="whitespace-nowrap hover:bg-yellow-50 p-2"
+                    className="whitespace-nowrap hidden md:block hover:bg-yellow-50 p-2"
                     onClick={() => setMenuDisplay((prev) => !prev)}
                   >
                     پروفایل
