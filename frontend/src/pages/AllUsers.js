@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react"
 import SummaryApi from "../common"
 import { toast } from "react-toastify"
-import moment from "moment"
+import { MdModeEdit } from "react-icons/md"
+import ChangeUserRole from "../components/ChangeUserRole"
+
+var moment = require("jalali-moment")
 
 function AllUsers() {
   const [allUser, setAllUsers] = useState([])
@@ -28,15 +31,16 @@ function AllUsers() {
   }, [])
 
   return (
-    <div>
+    <div className="bg-white">
       <table className="w-full bg-white ">
         <thead>
           <tr>
-            <th className=" font-medium text-base border">Sr.</th>
-            <th className=" font-medium text-base border">Name</th>
-            <th className=" font-medium text-base border">Email</th>
-            <th className=" font-medium text-base border">Role</th>
-            <th className=" font-medium text-base border">Created Date</th>
+            <th className=" font-medium text-base border">id</th>
+            <th className=" font-medium text-base border">نام</th>
+            <th className=" font-medium text-base border">ایمیل</th>
+            <th className=" font-medium text-base border">نقش</th>
+            <th className=" font-medium text-base border">تاریخ عضویت</th>
+            <th className=" font-medium text-base border">عملکرد</th>
           </tr>
         </thead>
         <tbody className="">
@@ -48,13 +52,20 @@ function AllUsers() {
                 <td className="text-center text-base border">{el?.email}</td>
                 <td className="text-center text-base border">{el?.role}</td>
                 <td className="text-center text-base border">
-                  {moment(el?.createdAt).format("ll")}
+                  {moment(el?.createdAt).locale("fa").format("YYYY/M/D")}
+                </td>
+                <td>
+                  <button className="p-2 bg-yellow-100 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-white transition-all duration-100">
+                    <MdModeEdit />
+                  </button>
                 </td>
               </tr>
             )
           })}
         </tbody>
       </table>
+
+      <ChangeUserRole />
     </div>
   )
 }
