@@ -74,7 +74,7 @@ const Header = () => {
                     className="whitespace-nowrap hidden md:block hover:bg-yellow-50 p-2"
                     onClick={() => setMenuDisplay((prev) => !prev)}
                   >
-                    پروفایل
+                    پنل ادمین
                   </Link>
                 </nav>
               </div>
