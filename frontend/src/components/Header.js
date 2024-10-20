@@ -40,8 +40,8 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="items-center justify-between hidden w-full max-w-xl pl-2 xl:ml-96 md:ml-60 border rounded-xl md:flex focus-within:shadow">
-          <div className="min-w-[50px] h-8 text-lg bg-yellow-400 flex items-center justify-center rounded-r-xl  cursor-pointer">
+        <div className="items-center justify-between hidden w-full max-w-xs border rounded-xl md:flex focus-within:shadow">
+          <div className="min-w-[50px] h-8 text-lg bg-yellow-400 flex items-center justify-center rounded-r-xl cursor-pointer">
             <GrSearch />
           </div>
           <input

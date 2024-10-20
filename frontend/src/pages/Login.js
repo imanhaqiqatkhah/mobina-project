@@ -73,7 +73,7 @@ const Login = () => {
                   name="email"
                   value={data.email}
                   onChange={handleOnChange}
-                  className="w-full h-full bg-transparent outline-none "
+                  className="w-full h-full bg-transparent outline-none font-sans"
                 />
               </div>
             </div>
@@ -86,7 +86,7 @@ const Login = () => {
                   name="password"
                   value={data.password}
                   onChange={handleOnChange}
-                  className="w-full h-full bg-transparent outline-none "
+                  className="w-full h-full bg-transparent outline-none font-sans"
                 />
                 <div
                   className="text-xl cursor-pointer"

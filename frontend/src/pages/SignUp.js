@@ -121,7 +121,7 @@ const SignUp = () => {
                   value={data.email}
                   onChange={handleOnChange}
                   required
-                  className="w-full h-full bg-transparent outline-none "
+                  className="w-full h-full bg-transparent outline-none font-sans"
                 />
               </div>
             </div>
@@ -135,7 +135,7 @@ const SignUp = () => {
                   value={data.password}
                   onChange={handleOnChange}
                   required
-                  className="w-full h-full bg-transparent outline-none "
+                  className="w-full h-full bg-transparent outline-none font-sans"
                 />
                 <div
                   className="text-xl cursor-pointer"
@@ -155,7 +155,7 @@ const SignUp = () => {
                   value={data.confirmPassword}
                   onChange={handleOnChange}
                   required
-                  className="w-full h-full bg-transparent outline-none "
+                  className="w-full h-full bg-transparent outline-none font-sans"
                 />
                 <div
                   className="text-xl cursor-pointer"
