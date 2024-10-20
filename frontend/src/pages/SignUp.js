@@ -66,7 +66,7 @@ const SignUp = () => {
         toast.error(dataApi.message)
       }
     } else {
-      console.log("please check password and confirm password")
+      toast.error("لطفا پسورد ها را بررسی نمایید")
     }
   }
 

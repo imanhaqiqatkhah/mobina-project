@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { FaRegUserCircle } from "react-icons/fa"
 import { useSelector } from "react-redux"
 import { Link, Outlet } from "react-router-dom"
 
 function AdminPanel() {
   const user = useSelector((state) => state?.user?.user)
+
+  useEffect(() => {}, [])
 
   return (
     <div dir="rtl" className="min-h-[calc(100vh-120px)] md:flex hidden">

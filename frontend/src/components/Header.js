@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import SummaryApi from "../common"
 import { toast } from "react-toastify"
 import { setUserDetails } from "../store/userSlice"
+import ROLE from "../common/role"
 
 const Header = () => {
   const user = useSelector((state) => state?.user?.user)
@@ -58,7 +59,7 @@ const Header = () => {
               {user?.profilePic ? (
                 <img
                   src={user?.profilePic}
-                  className="mx-auto h-10 w-10  sm:h-11 md:w-96 lg:w-60 md:h-22 rounded-full"
+                  className="mx-auto h-10 w-10 rounded-full"
                   alt={user?.name}
                 />
               ) : (
@@ -69,13 +70,15 @@ const Header = () => {
             {menuDisplay && (
               <div className="bg-white bottom-0 absolute top-11 h-fit p-2 shadow-lg rounded">
                 <nav>
-                  <Link
-                    to={"admin-panel"}
-                    className="whitespace-nowrap hidden md:block hover:bg-yellow-50 p-2"
-                    onClick={() => setMenuDisplay((prev) => !prev)}
-                  >
-                    پنل ادمین
-                  </Link>
+                  {user?.role === ROLE.ADMIN && (
+                    <Link
+                      to={"admin-panel"}
+                      className="whitespace-nowrap hidden md:block hover:bg-yellow-50 p-2"
+                      onClick={() => setMenuDisplay((prev) => !prev)}
+                    >
+                      پنل ادمین
+                    </Link>
+                  )}
                 </nav>
               </div>
             )}

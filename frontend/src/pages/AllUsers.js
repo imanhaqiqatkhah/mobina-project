@@ -8,6 +8,13 @@ var moment = require("jalali-moment")
 
 function AllUsers() {
   const [allUser, setAllUsers] = useState([])
+  const [openUpdateRole, setOpenUpdateRole] = useState(false)
+  const [updateUserDetails, setUpdateUserDetails] = useState({
+    email: "",
+    name: "",
+    role: "",
+    _id: "",
+  })
 
   const fetchAllUsers = async () => {
     const fetchData = await fetch(SummaryApi.allUser.url, {
@@ -34,7 +41,7 @@ function AllUsers() {
     <div className="bg-white">
       <table className="w-full bg-white ">
         <thead>
-          <tr>
+          <tr className="bg-black text-white">
             <th className=" font-medium text-base border">id</th>
             <th className=" font-medium text-base border">نام</th>
             <th className=" font-medium text-base border">ایمیل</th>
@@ -55,7 +62,13 @@ function AllUsers() {
                   {moment(el?.createdAt).locale("fa").format("YYYY/M/D")}
                 </td>
                 <td>
-                  <button className="p-2 bg-yellow-100 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-white transition-all duration-100">
+                  <button
+                    className="p-2 bg-yellow-100 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-white transition-all duration-100"
+                    onClick={() => {
+                      setUpdateUserDetails(el)
+                      setOpenUpdateRole(true)
+                    }}
+                  >
                     <MdModeEdit />
                   </button>
                 </td>
@@ -65,7 +78,16 @@ function AllUsers() {
         </tbody>
       </table>
 
-      <ChangeUserRole />
+      {openUpdateRole && (
+        <ChangeUserRole
+          onClose={() => setOpenUpdateRole(false)}
+          name={updateUserDetails.name}
+          email={updateUserDetails.email}
+          role={updateUserDetails.role}
+          userId={updateUserDetails._id}
+          callFunc={fetchAllUsers}
+        />
+      )}
     </div>
   )
 }
